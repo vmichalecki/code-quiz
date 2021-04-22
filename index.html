@@ -9,14 +9,21 @@
     <title>Code Quiz</title>
 </head>
 
-<!-- make another page for scores -->
-<!-- make a header that holds link to scores on the left and a timer on the right -->
+<header>
+    <a href=high-scores.html target="_blank">View High Scores</a>
+    <div>Timer</div>
+</header>
 
 <body>
-
-    <!-- make a div for instructions -->
-    <!-- make a container for the quetsions and answers -->
-    <script src="./assets/js/script.js"></script>
+    <div id="instructions" class="instructions"></div>
+    <button id="start">Start Quiz</button>
+    <container>
+        <div id="questions" class="questions"></div>
+        <div id="choices" class="choices"></div>
+    </container>
+    <button id="save-score">Save Score</button>
+    <!-- <script src="./assets/js/questions.js"></script> -->
+    <script src="./assets/js/scripts.js"></script>
 </body>
 
 </html>
