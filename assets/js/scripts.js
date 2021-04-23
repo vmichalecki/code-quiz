@@ -1,10 +1,12 @@
 // define variables //////////////////////////////////
-
 let startBtn = document.getElementById('start');
 let saveScore = document.getElementById('save-score');
-let choiceBtn = document.getElementById('choiceBtn');
-const questionsIndex = 0;
-const answersIndex = 0;
+let choiceBtn0 = document.getElementById('choice-btn-0');
+let choiceBtn1 = document.getElementById('choice-btn-1');
+let choiceBtn2 = document.getElementById('choice-btn-2');
+let choiceBtn3 = document.getElementById('choice-btn-3');
+let questionsIndex = 0;
+let answersIndex = 0;
 let body = document.body;
 // const buttonEl = document.container.getElementsByTagName('button');
 
@@ -27,7 +29,7 @@ let questions = [
 	{
 		question: 'where are we?',
 		answers: ['everywhere', 'nowhere', 'lost?', "who is'we'?"],
-		correctAnswer: 'ok',
+		correctAnswer: 'nowhere',
 	},
 ];
 
@@ -41,35 +43,43 @@ function startQuiz() {
 
 // get the next question
 function showQuestion() {
-	let setQuestion = questions[questionsIndex].question;
-	for (let i = 0; i < questions.length; i++);
-	document.getElementById('questions').innerHTML = ('setQuestion', JSON.stringify(setQuestion));
+	let setQuestion = questions[questionsIndex];
 
-	for (let i = 0; i < questions.length; i++) {
-		let answers = questions[i].answers;
-		document.getElementById('choiceBtn').innerHTML = answers;
+	document.getElementById('questions').innerHTML = setQuestion.question;
 
-		// verifyAnswer();
-		// loop show the choices (buttons)
-		// add event listener for the each button created
-		// verifyAnswer();
+	let answers = setQuestion.answers;
+	for (let i = 0; i < answers.length; i++) {
+		document.querySelector(`#choice-btn-${i}`).innerHTML = answers[i];
+		document.querySelector(`#choice-btn-${i}`).setAttribute('value', answers[i]);
 	}
+
+	verifyAnswer();
 }
 
 // check user selection
 function verifyAnswer() {
-	if (onclick)
-		// check the user selection against correct answer
-		// incorrect remove seconds
-		// set score
-		// get next question
-		showQuestion();
+	if (this.value === questions[questionsIndex].correctAnswer) {
+		alert('correct');
+		questionsIndex++;
+		if (questionsIndex < questions.length) {
+			showQuestion();
+		} else {
+			endGame();
+		}
+	} else {
+	}
+
+	// check the user selection against correct answer
+	// incorrect remove seconds
+	// set score
+	// get next question
+	// showQuestion();
 	// if questions.length
-	endGame();
 }
 
 // end game
 function endGame() {
+	alert('gameov er ');
 	// set their score
 	// show end screen
 	// clear out timer
@@ -82,7 +92,11 @@ function saveHighScore() {
 }
 
 // event listeners //////////////////////////////////
-choiceBtn.addEventListener('click', verifyAnswer);
+// choiceBtn.addEventListener('click', verifyAnswer);
+choiceBtn0.addEventListener('click', verifyAnswer);
+choiceBtn1.addEventListener('click', verifyAnswer);
+choiceBtn2.addEventListener('click', verifyAnswer);
+choiceBtn3.addEventListener('click', verifyAnswer);
 
 // start button click
 startBtn.addEventListener('click', startQuiz);
