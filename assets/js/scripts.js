@@ -10,7 +10,9 @@ let initialInput = document.getElementById('initials');
 let saveScore = document.getElementById('save-score');
 let body = document.body;
 let questionsIndex = 0;
-let countdown = 125;
+let countdown = 100;
+
+let highScoresArray = JSON.parse(localStorage.getItem('highScoresArray')) || [];
 
 let questions = [
 	{
@@ -64,7 +66,6 @@ function startTimer() {
 	}, 1000);
 }
 
-// get the next question
 function showQuestion() {
 	let setQuestion = questions[questionsIndex];
 	document.getElementById('questions').innerHTML = setQuestion.question;
@@ -94,38 +95,27 @@ function endGame() {
 	form.style.display = 'block';
 }
 
-// save high score
 function saveHighScore(event) {
 	event.preventDefault();
 	let initialInput = document.getElementById('initials').value;
 
-	let highScoreObj = {
+	let highScores = {
 		name: initialInput,
 		score: countdown,
 	};
 
-	if (localStorage.getItem('highScore') === null) {
-		localStorage.setItem('highScore', '[]');
-	}
-	let oldHighScores = JSON.parse(localStorage.getItem('highScore'));
-	oldHighScores.push(highScoreObj);
-	localStorage.setItem('highScore', JSON.stringify(oldHighScores));
+	highScoresArray.push(highScores);
+	highScoresArray.sort((a, b) => b.highScores - a.highScores);
 
-	console.log(oldHighScores);
-	console.log(highScoreObj);
+	localStorage.setItem('highScoresArray', JSON.stringify(highScoresArray));
+
+	linkToHighScores();
 }
 
-// function getHighScore() {
-// 	let highScores = JSON.parse(localStorage.getItem('highScore'));
-// 	//sort here by score key
-// 	highScores.sort((a, b) => b.score - a.score);
-// 	//loop through highscores array & display on title screen
-// 	for (i = 0; i < highScores.length; i++) {
-// 		let scoreLi = document.createElement('li');
-// 		scoreLi.textContent = `${highScores[i].name}				` + `${highScores[i].score}`;
-// 		oldHighScoresTitle.appendChild(scoreLi);
-// 	}
-// }
+function linkToHighScores() {
+	window.location.href = './high-scores.html';
+}
+
 
 // event listeners //////////////////////////////////
 choiceBtn0.addEventListener('click', verifyAnswer);
@@ -136,3 +126,11 @@ startBtn.addEventListener('click', startQuiz);
 saveScore.addEventListener('click', saveHighScore);
 
 init();
+
+// TO DO
+// when game ends, notify user of their final score and instruct user to enter initals to save score
+// when you follow the high scores link, it displays scores from localStorage
+// notify user if answer is incorrect
+// add comments
+// add screenshot to readme
+// add css to high scores innerHTML

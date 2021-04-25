@@ -15,7 +15,8 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 50px;
+	padding: 2rem 5rem;
+	font-size: 1.25rem;
 }
 
 .instructions {
@@ -23,7 +24,7 @@ header {
 	border: 5px solid var(--black);
 	border-radius: 5px;
 	text-align: center;
-	margin: 2rem 2rem;
+	margin: 2rem 5rem;
 }
 
 h2 {
@@ -37,4 +38,25 @@ p {
 	font-family: 'Fauna One', serif;
 	font-size: 200%;
 	background-color: var(--yellow);
+	display: flex;
+	margin: auto;
+	border-radius: 5px;
+	padding: 1rem;
+}
+
+.start:hover,
+.choice-btn:hover {
+	cursor: pointer;
+	opacity: 50%;
+}
+
+.question-container,
+.form {
+	text-align: center;
+}
+
+.choice-btn {
+	border-radius: 5px;
+	padding: 1rem;
+	margin: 1rem;
 }
