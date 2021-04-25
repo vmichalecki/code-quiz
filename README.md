@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a timed puzzle in the form of multiple-choice quiz designed to inspire existential dread.
+This is a timed puzzle in the form of a multiple-choice quiz written to inspire existential dread.
 
 This project was designed by applying newly acquired skills and concepts such as traversing and manipulating the DOM with JavaScript.
 
