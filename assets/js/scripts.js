@@ -1,25 +1,29 @@
-// define variables //////////////////////////////////
 let startBtn = document.getElementById('start');
-let saveScore = document.getElementById('save-score');
 let choiceBtn0 = document.getElementById('choice-btn-0');
 let choiceBtn1 = document.getElementById('choice-btn-1');
 let choiceBtn2 = document.getElementById('choice-btn-2');
 let choiceBtn3 = document.getElementById('choice-btn-3');
-let questionsIndex = 0;
-let answersIndex = 0;
+let instructions = document.getElementById('instructions');
+let questionContainer = document.getElementById('question-container');
+let form = document.getElementById('form');
+
+let initialInput = document.getElementById('initials');
+let saveScore = document.getElementById('save-score');
+
 let body = document.body;
-// const buttonEl = document.container.getElementsByTagName('button');
+let questionsIndex = 0;
+let countdown = 125;
 
 let questions = [
 	{
 		question: 'what is your favorite color?',
-		answers: ['blue', 'hot pink', 'red', 'green'],
+		answers: ['lemon chiffon', 'hot pink', 'rebecca purple', 'goldenrod'],
 		correctAnswer: 'hot pink',
 	},
 	{
 		question: 'how much is too much?',
-		answers: ['never too much', 'much too much', 'what?', 'two'],
-		correctAnswer: 'never too much',
+		answers: ['there is no such thing', 'much too much', 'what?', 'two'],
+		correctAnswer: 'there is no such thing',
 	},
 	{
 		question: 'why?',
@@ -28,23 +32,43 @@ let questions = [
 	},
 	{
 		question: 'where are we?',
-		answers: ['everywhere', 'nowhere', 'lost?', "who is'we'?"],
-		correctAnswer: 'nowhere',
+		answers: ['everywhere', 'nowhere', 'lost?', "who is 'we'?"],
+		correctAnswer: "who is 'we'?",
 	},
 ];
 
-// functions //////////////////////////////////
-// start quiz - init
+function init() {
+	instructions.style.display = 'block';
+	questionContainer.style.display = 'none';
+	form.style.display = 'none';
+}
+
 function startQuiz() {
-	// start timer
-	// find dom element to show the question
+	instructions.style.display = 'none';
+	questionContainer.style.display = 'block';
 	showQuestion();
+	startTimer();
+	if (startBtn.style.display === 'none') {
+		startBtn.style.display = 'block';
+	} else {
+		startBtn.style.display = 'none';
+	}
+}
+
+function startTimer() {
+	var interval = setInterval(function () {
+		countdown--;
+		document.getElementById('timer').textContent = countdown;
+		if (countdown <= 0 || questionsIndex >= questions.length) {
+			clearInterval(interval);
+			endGame();
+		}
+	}, 1000);
 }
 
 // get the next question
 function showQuestion() {
 	let setQuestion = questions[questionsIndex];
-
 	document.getElementById('questions').innerHTML = setQuestion.question;
 
 	let answers = setQuestion.answers;
@@ -52,54 +76,41 @@ function showQuestion() {
 		document.querySelector(`#choice-btn-${i}`).innerHTML = answers[i];
 		document.querySelector(`#choice-btn-${i}`).setAttribute('value', answers[i]);
 	}
-
-	verifyAnswer();
 }
 
-// check user selection
 function verifyAnswer() {
 	if (this.value === questions[questionsIndex].correctAnswer) {
-		alert('correct');
 		questionsIndex++;
 		if (questionsIndex < questions.length) {
 			showQuestion();
-		} else {
-			endGame();
 		}
 	} else {
+		console.log('wrong');
+		countdown -= 10;
 	}
-
-	// check the user selection against correct answer
-	// incorrect remove seconds
-	// set score
-	// get next question
-	// showQuestion();
-	// if questions.length
 }
 
-// end game
 function endGame() {
-	alert('gameov er ');
-	// set their score
-	// show end screen
-	// clear out timer
+	alert('game over');
+	questionContainer.style.display = 'none';
+	form.style.display = 'block';
 }
 
 // save high score
-function saveHighScore() {
-	// prompt for initials
-	// save score to localstorage
+function saveHighScore(event) {
+	event.preventDefault();
+
+	let initialInput = document.getElementById('initials').value;
+	localStorage.setItem('initialInput', initialInput);
+	localStorage.setItem('countdown', countdown);
 }
 
 // event listeners //////////////////////////////////
-// choiceBtn.addEventListener('click', verifyAnswer);
 choiceBtn0.addEventListener('click', verifyAnswer);
 choiceBtn1.addEventListener('click', verifyAnswer);
 choiceBtn2.addEventListener('click', verifyAnswer);
 choiceBtn3.addEventListener('click', verifyAnswer);
-
-// start button click
 startBtn.addEventListener('click', startQuiz);
-
-// save high score
 saveScore.addEventListener('click', saveHighScore);
+
+init();
