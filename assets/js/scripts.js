@@ -6,10 +6,8 @@ let choiceBtn3 = document.getElementById('choice-btn-3');
 let instructions = document.getElementById('instructions');
 let questionContainer = document.getElementById('question-container');
 let form = document.getElementById('form');
-
 let initialInput = document.getElementById('initials');
 let saveScore = document.getElementById('save-score');
-
 let body = document.body;
 let questionsIndex = 0;
 let countdown = 125;
@@ -99,11 +97,35 @@ function endGame() {
 // save high score
 function saveHighScore(event) {
 	event.preventDefault();
-
 	let initialInput = document.getElementById('initials').value;
-	localStorage.setItem('initialInput', initialInput);
-	localStorage.setItem('countdown', countdown);
+
+	let highScoreObj = {
+		name: initialInput,
+		score: countdown,
+	};
+
+	if (localStorage.getItem('highScore') === null) {
+		localStorage.setItem('highScore', '[]');
+	}
+	let oldHighScores = JSON.parse(localStorage.getItem('highScore'));
+	oldHighScores.push(highScoreObj);
+	localStorage.setItem('highScore', JSON.stringify(oldHighScores));
+
+	console.log(oldHighScores);
+	console.log(highScoreObj);
 }
+
+// function getHighScore() {
+// 	let highScores = JSON.parse(localStorage.getItem('highScore'));
+// 	//sort here by score key
+// 	highScores.sort((a, b) => b.score - a.score);
+// 	//loop through highscores array & display on title screen
+// 	for (i = 0; i < highScores.length; i++) {
+// 		let scoreLi = document.createElement('li');
+// 		scoreLi.textContent = `${highScores[i].name}				` + `${highScores[i].score}`;
+// 		oldHighScoresTitle.appendChild(scoreLi);
+// 	}
+// }
 
 // event listeners //////////////////////////////////
 choiceBtn0.addEventListener('click', verifyAnswer);
