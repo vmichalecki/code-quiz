@@ -11,6 +11,7 @@ let saveScore = document.getElementById('save-score');
 let body = document.body;
 let questionsIndex = 0;
 let countdown = 100;
+let highScores = document.getElementById('high-scores');
 
 let highScoresArray = JSON.parse(localStorage.getItem('highScoresArray')) || [];
 
@@ -110,12 +111,20 @@ function saveHighScore(event) {
 	localStorage.setItem('highScoresArray', JSON.stringify(highScoresArray));
 
 	linkToHighScores();
+	displayScores();
 }
 
 function linkToHighScores() {
 	window.location.href = './high-scores.html';
 }
 
+function displayScores() {
+	highScores.innerHTML = highScoresArray
+		.map((score) => {
+			return `<li>${score.initials}<span> , </span>${score.score}</li>`;
+		})
+		.join('');
+}
 
 // event listeners //////////////////////////////////
 choiceBtn0.addEventListener('click', verifyAnswer);
