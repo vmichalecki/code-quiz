@@ -13,7 +13,7 @@ let saveScore = document.getElementById('save-score');
 let body = document.body;
 
 let questionsIndex = 0;
-let countdown = 150;
+let countdown = 250;
 
 let highScoresArray = JSON.parse(localStorage.getItem('highScoresArray')) || [];
 

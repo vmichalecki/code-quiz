@@ -11,15 +11,18 @@
     <title>Code Quiz</title>
 </head>
 
-<header>
+<header class="questions-header">
     <a href=high-scores.html target="_blank">view high scores</a>
-    <h4>timer: <span id="timer">150</span> seconds</h4>
+    <h4>timer: <span id="timer">250</span> seconds</h4>
 </header>
 
 <body>
     <div id="instructions" class="instructions">
-        <h2>the existential dread quiz</h2>
+        <h2>the questions of existential dread</h2>
         <p>here are some questions to ask yourself when embarking on an existential crisis.</p>
+        <p>it should be noted that the questions, akin to the mortal experience, do not advance until you discover the
+            correct answer.</p>
+        <p>for every wrong answer chosen, 10 seconds is taken from your timer/final score/life.</p>
     </div>
 
     <button id="start" class="start">start quiz</button>
@@ -36,7 +39,7 @@
 
     <div id="form" class="form">
         <div class="final-score">
-            <p>your score is</p>
+            <p>one's score is</p>
             <p id="finalScore"></p>
         </div>
         <p>enter one's initials to save one's score</p>
