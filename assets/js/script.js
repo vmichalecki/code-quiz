@@ -1,14 +1,17 @@
+// global variables
 let startBtn = document.getElementById('start');
+let instructions = document.getElementById('instructions');
+let questionContainer = document.getElementById('question-container');
 let choiceBtn0 = document.getElementById('choice-btn-0');
 let choiceBtn1 = document.getElementById('choice-btn-1');
 let choiceBtn2 = document.getElementById('choice-btn-2');
 let choiceBtn3 = document.getElementById('choice-btn-3');
-let instructions = document.getElementById('instructions');
-let questionContainer = document.getElementById('question-container');
 let form = document.getElementById('form');
 let initialInput = document.getElementById('initials');
 let saveScore = document.getElementById('save-score');
+
 let body = document.body;
+
 let questionsIndex = 0;
 let countdown = 150;
 
@@ -73,12 +76,14 @@ let questions = [
 	},
 ];
 
+// loads the page with only the instructions, start button, and header
 function init() {
 	instructions.style.display = 'block';
 	questionContainer.style.display = 'none';
 	form.style.display = 'none';
 }
 
+// starts the quiz, displays first question, starts the countdown, hides the instructions
 function startQuiz() {
 	instructions.style.display = 'none';
 	questionContainer.style.display = 'block';
@@ -91,6 +96,7 @@ function startQuiz() {
 	}
 }
 
+// timer countdown function
 function startTimer() {
 	var interval = setInterval(function () {
 		countdown--;
@@ -102,6 +108,7 @@ function startTimer() {
 	}, 1000);
 }
 
+// loops through each question and answer set until it's finished
 function showQuestion() {
 	let setQuestion = questions[questionsIndex];
 	document.getElementById('questions').innerHTML = setQuestion.question;
@@ -113,6 +120,7 @@ function showQuestion() {
 	}
 }
 
+// checks if the answer is correct or not
 function verifyAnswer() {
 	if (this.value === questions[questionsIndex].correctAnswer) {
 		questionsIndex++;
@@ -124,34 +132,33 @@ function verifyAnswer() {
 	}
 }
 
+// finishes the game
 function endGame() {
 	questionContainer.style.display = 'none';
 	form.style.display = 'block';
 	document.getElementById('finalScore').innerHTML = countdown;
 }
 
+// saves the high score to localStorage
 function saveHighScore(event) {
 	event.preventDefault();
-
 	let initialInput = document.getElementById('initials').value;
-
 	let highScores = {
 		name: initialInput,
 		score: countdown,
 	};
 
 	highScoresArray.push(highScores);
-
 	localStorage.setItem('highScoresArray', JSON.stringify(highScoresArray));
-
 	linkToHighScores();
 }
 
+// links to another HTML page with the high scores displayed
 function linkToHighScores() {
 	window.location.href = './high-scores.html';
 }
 
-// event listeners //////////////////////////////////
+// event listeners
 choiceBtn0.addEventListener('click', verifyAnswer);
 choiceBtn1.addEventListener('click', verifyAnswer);
 choiceBtn2.addEventListener('click', verifyAnswer);
@@ -160,9 +167,3 @@ startBtn.addEventListener('click', startQuiz);
 saveScore.addEventListener('click', saveHighScore);
 
 init();
-
-// TO DO
-// when game ends, notify user of their final score and instruct user to enter initals to save score
-
-// add comments
-// add screenshot to readme

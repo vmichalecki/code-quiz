@@ -60,6 +60,12 @@ p {
 	text-align: center;
 }
 
+.choices {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
 .choice-btn {
 	border-radius: 5px;
 	padding: 1rem;
@@ -72,6 +78,18 @@ p {
 	justify-content: center;
 }
 
+.high-score-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: auto;
+}
+
+h1 {
+	font-family: 'Fauna One', serif;
+	text-align: center;
+}
+
 li {
 	display: flex;
 	flex-direction: row;
@@ -81,16 +99,24 @@ li {
 	font-size: 1.5rem;
 }
 
-h1 {
-	font-family: 'Fauna One', serif;
-	text-align: center;
-}
-
-.try-again-link {
+.try-again-link:link,
+.try-again-link:visited,
+.try-again-link:active {
 	background: var(--yellow);
 	text-decoration: none;
+	color: var(--black);
 }
 
 .italicize {
 	font-style: italic;
+}
+
+@media screen and (max-width: 520px) {
+	header,
+	.choices {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		font-size: 1em;
+	}
 }
