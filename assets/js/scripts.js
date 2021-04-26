@@ -10,11 +10,16 @@ let initialInput = document.getElementById('initials');
 let saveScore = document.getElementById('save-score');
 let body = document.body;
 let questionsIndex = 0;
-let countdown = 100;
+let countdown = 150;
 
 let highScoresArray = JSON.parse(localStorage.getItem('highScoresArray')) || [];
 
 let questions = [
+	{
+		question: "how do you know you're not dreaming right now?",
+		answers: ["i can't die in my dreams", 'i can see my hands', 'i can smell the gas leak', "i don't dream"],
+		correctAnswer: 'i can smell the gas leak',
+	},
 	{
 		question: 'what is your favorite color?',
 		answers: ['lemon chiffon', 'hot pink', 'rebecca purple', 'goldenrod'],
@@ -26,6 +31,12 @@ let questions = [
 		correctAnswer: 'there is no such thing',
 	},
 	{
+		question: 'say when',
+		answers: ['when?', 'when.', 'why?', 'no'],
+		correctAnswer: 'when.',
+	},
+
+	{
 		question: 'why?',
 		answers: ['cuz', 'because', 'why not?', 'ok'],
 		correctAnswer: 'ok',
@@ -34,6 +45,31 @@ let questions = [
 		question: 'where are we?',
 		answers: ['everywhere', 'nowhere', 'lost?', "who is 'we'?"],
 		correctAnswer: "who is 'we'?",
+	},
+	{
+		question: 'what color is the sun?',
+		answers: ['yellow', 'the color of fire', 'what sun?', 'the color of my eyes'],
+		correctAnswer: 'the color of my eyes',
+	},
+	{
+		question: 'who are you?',
+		answers: [
+			'i am me',
+			'i am not my mind nor body, but an awareness of their dual existence',
+			'who am i?',
+			'who are you?',
+		],
+		correctAnswer: 'who am i?',
+	},
+	{
+		question: 'who am i?',
+		answers: ['you are me', 'who are you?', 'what is this?', "i don't know"],
+		correctAnswer: "i don't know",
+	},
+	{
+		question: 'what is life?',
+		answers: ['life is an experiment', 'life is suffering', 'life is being alive', 'life is a simulation'],
+		correctAnswer: 'life is suffering',
 	},
 ];
 
@@ -84,19 +120,19 @@ function verifyAnswer() {
 			showQuestion();
 		}
 	} else {
-		console.log('wrong');
 		countdown -= 10;
 	}
 }
 
 function endGame() {
-	alert('game over');
 	questionContainer.style.display = 'none';
 	form.style.display = 'block';
+	document.getElementById('finalScore').innerHTML = countdown;
 }
 
 function saveHighScore(event) {
 	event.preventDefault();
+
 	let initialInput = document.getElementById('initials').value;
 
 	let highScores = {
@@ -105,7 +141,6 @@ function saveHighScore(event) {
 	};
 
 	highScoresArray.push(highScores);
-	highScoresArray.sort((a, b) => b.highScores - a.highScores);
 
 	localStorage.setItem('highScoresArray', JSON.stringify(highScoresArray));
 
@@ -128,8 +163,6 @@ init();
 
 // TO DO
 // when game ends, notify user of their final score and instruct user to enter initals to save score
-// when you follow the high scores link, it displays scores from localStorage
-// notify user if answer is incorrect
+
 // add comments
 // add screenshot to readme
-// add css to high scores innerHTML

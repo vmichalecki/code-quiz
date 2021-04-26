@@ -12,14 +12,14 @@
 </head>
 
 <header>
-    <a href=high-scores.html target="_blank">View High Scores</a>
-    <h4>Timer: <span id="timer">100</span></h4>
+    <a href=high-scores.html target="_blank">view high scores</a>
+    <h4>timer: <span id="timer">150</span> seconds</h4>
 </header>
 
 <body>
     <div id="instructions" class="instructions">
         <h2>the existential dread quiz</h2>
-        <p>here are some questions to ask yourself to initiate an existential crisis.</p>
+        <p>here are some questions to ask yourself when embarking on an existential crisis.</p>
     </div>
     <button id="start" class="start">start quiz</button>
     <container id="question-container" class="question-container">
@@ -31,15 +31,19 @@
             <button class="choice-btn" id="choice-btn-3">D</button>
         </div>
     </container>
-    <div id="form" class="form">
+    <div< id="form" class="form">
+        <div class="final-score">
+            <p>your score is</p>
+            <p id="finalScore"></p>
+        </div>
+        <p>enter one's initials to save one's score</p>
         <form action="save-score-form" method="post">
-            <label for="initials">initials:</label>
             <input type="text" id="initials" name="user-initials">
             <button type="submit" class="saveInitials" id="save-score">save score</button>
         </form>
-    </div>
+        </div>
 
-    <script src="./assets/js/scripts.js"></script>
+        <script src="./assets/js/scripts.js"></script>
 </body>
 
 </html>

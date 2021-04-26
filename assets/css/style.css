@@ -30,11 +30,15 @@ header {
 h2 {
 	font-family: 'Fauna One', serif;
 }
+
 p {
 	font-family: 'Raleway', sans-serif;
+	text-align: center;
+	padding: 0.1rem;
 }
 
-.start {
+.start,
+.try-again {
 	font-family: 'Fauna One', serif;
 	font-size: 200%;
 	background-color: var(--yellow);
@@ -45,7 +49,8 @@ p {
 }
 
 .start:hover,
-.choice-btn:hover {
+.choice-btn:hover,
+.try-again:hover {
 	cursor: pointer;
 	opacity: 50%;
 }
@@ -59,4 +64,33 @@ p {
 	border-radius: 5px;
 	padding: 1rem;
 	margin: 1rem;
+}
+
+.final-score {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+li {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 25rem;
+	margin: auto;
+	font-size: 1.5rem;
+}
+
+h1 {
+	font-family: 'Fauna One', serif;
+	text-align: center;
+}
+
+.try-again-link {
+	background: var(--yellow);
+	text-decoration: none;
+}
+
+.italicize {
+	font-style: italic;
 }
